@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "89c7f37c-2afe-4c57-ae4a-43d099f0a2d3",
+		"name": "MesaFlow API",
+		"description": "Colección Postman para MesaFlow API - control y estado de mesas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45515711",
+		"_collection_link": "https://imanol-3787254.postman.co/workspace/Imanol's-Workspace~1c0a8617-56a5-4e8a-8178-e95137aeab22/collection/45515711-89c7f37c-2afe-4c57-ae4a-43d099f0a2d3?action=share&source=collection_link&creator=45515711"
+	},
+	"item": [
+		{
+			"name": "Auth - Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"secret123\",\n  \"username\": \"admin\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Guarda token en variable de colección",
+							"var json = pm.response.json();",
+							"if (json.token) { pm.collectionVariables.set('token', json.token); }"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"secret123\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mesas - Listar todas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/mesas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"mesas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mesas - Obtener por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/mesas/{{mesaId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"mesas",
+						"{{mesaId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mesas - Estadísticas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/mesas/stats",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"mesas",
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mesas - Crear (protegido)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"numeroMesa\": 1,\n  \"estado\": \"libre\",\n  \"capacidad\": 4,\n  \"pedidoPendiente\": false\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/mesas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"mesas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mesas - Actualizar (protegido)",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"estado\": \"ocupada\",\n  \"pedidoPendiente\": true\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/mesas/{{mesaId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"mesas",
+						"{{mesaId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mesas - Eliminar (protegido)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/mesas/69814eaf7d77db41b70bb5f3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"mesas",
+						"69814eaf7d77db41b70bb5f3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTgxNGU4OTdkNzdkYjQxYjcwYmI1ZTgiLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsImlhdCI6MTc3MDA4NTcwNywiZXhwIjoxNzcwMTE0NTA3fQ.4mh1_7CdaOAHtf--bLiln6ZN4XZtDrMSfJ8KdwGS330",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api"
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "mesaId",
+			"value": ""
+		}
+	]
+}
