@@ -89,9 +89,6 @@ Endpoints principales
 
   - `DELETE /api/mesas/:id` — elimina la mesa.
 
-- Búsqueda
-  - `GET /api/search` — parámetros query soportados: `numeroMesa`, `estado`, `minCapacidad`, `maxCapacidad`, `pedidoPendiente`.
-    - Ejemplo: `/api/search?estado=ocupada&minCapacidad=2`
 
 Validaciones y errores
 - Creación y actualización de `Mesa` usan Zod (`src/validators/mesaValidator.ts`). Errores devuelven status `400` con detalle del error.
